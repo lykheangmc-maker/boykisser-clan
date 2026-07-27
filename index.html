@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KR Chack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fff0f5 0%, #ffe4f0 50%, #ffd6e8 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* floating background bubbles */
+    .bubbles span {
+      position: fixed;
+      bottom: -80px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 182, 203, 0.35);
+      border-radius: 50%;
+      animation: float 12s infinite ease-in-out;
+    }
+    .bubbles span:nth-child(1) { left: 8%; width: 70px; height: 70px; animation-delay: 0s; animation-duration: 10s; }
+    .bubbles span:nth-child(2) { left: 22%; width: 35px; height: 35px; animation-delay: 2s; animation-duration: 14s; }
+    .bubbles span:nth-child(3) { left: 40%; width: 55px; height: 55px; animation-delay: 4s; animation-duration: 11s; }
+    .bubbles span:nth-child(4) { left: 60%; width: 45px; height: 45px; animation-delay: 0s; animation-duration: 13s; }
+    .bubbles span:nth-child(5) { left: 75%; width: 60px; height: 60px; animation-delay: 3s; animation-duration: 9s; }
+    .bubbles span:nth-child(6) { left: 90%; width: 30px; height: 30px; animation-delay: 5s; animation-duration: 16s; }
+    .bubbles span:nth-child(7) { left: 50%; width: 50px; height: 50px; animation-delay: 1s; animation-duration: 12s; }
+
+    @keyframes float {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      50%  { opacity: 0.3; }
+      100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* main card */
+    .card {
+      text-align: center;
+      padding: 60px 50px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 28px;
+      border: 2px solid rgba(255, 182, 203, 0.5);
+      box-shadow:
+        0 8px 32px rgba(255, 105, 148, 0.15),
+        0 0 80px rgba(255, 182, 203, 0.2);
+      position: relative;
+      z-index: 10;
+      max-width: 480px;
+      width: 90%;
+      animation: popIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes popIn {
+      0%   { transform: scale(0.7) translateY(30px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    /* emoji decoration */
+    .card .deco {
+      font-size: 48px;
+      margin-bottom: 10px;
+      display: block;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* title */
+    .card h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #d63384;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 8px rgba(214, 51, 132, 0.15);
+    }
+
+    .card p {
+      font-size: 1.05rem;
+      color: #a0607a;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    /* discord button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, #d63384 0%, #e056a0 100%);
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow:
+        0 4px 20px rgba(214, 51, 132, 0.4),
+        0 0 0 0 rgba(214, 51, 132, 0);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow:
+        0 8px 30px rgba(214, 51, 132, 0.5),
+        0 0 0 4px rgba(214, 51, 132, 0.15);
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* heart corners */
+    .heart-tl, .heart-br {
+      position: fixed;
+      font-size: 28px;
+      opacity: 0.25;
+      z-index: 1;
+    }
+    .heart-tl { top: 20px; left: 24px; }
+    .heart-br { bottom: 20px; right: 24px; }
+
+    /* responsive */
+    @media (max-width: 500px) {
+      .card {
+        padding: 44px 28px;
+      }
+      .card h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- background bubbles -->
+  <div class="bubbles">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- corner hearts -->
+  <div class="heart-tl">♡</div>
+  <div class="heart-br">♡</div>
+
+  <!-- main content -->
+  <div class="card">
+    <span class="deco">🎀</span>
+    <h1>KR Chack</h1>
+    <p>Welcome! Join our community and hang out with us on Discord~</p>
+    <a
+      href="https://discord.gg/UepdynfHUE"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn"
+    >
+      <!-- Discord icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.332-.946 2.418-2.157 2.418z"/>
+      </svg>
+      Join Discord
+    </a>
+  </div>
+
+</body>
+</html>
